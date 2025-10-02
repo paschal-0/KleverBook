@@ -4,7 +4,6 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
-  Image,
   StatusBar,
   ScrollView,
   Modal,
@@ -15,13 +14,16 @@ import {observer} from 'mobx-react';
 import store from '../../store/index';
 import utils from '../../utils/index';
 import theme from '../../theme';
-import FastImage from 'react-native-fast-image';
+// removed: import FastImage from 'react-native-fast-image';
 import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-easy-toast';
-import MaskedView from '@react-native-community/masked-view';
+import MaskedView from '@react-native-masked-view/masked-view';
 import Svg, {Path} from 'react-native-svg';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
 import RBSheet from 'react-native-raw-bottom-sheet';
+
+// expo-image
+import { Image as ExpoImage } from 'expo-image';
 
 export default observer(Book);
 function Book(props) {
@@ -91,24 +93,6 @@ function Book(props) {
 
   const renderCoverImage = () => {
     return (
-      // <MaskedView
-      //   style={[
-      //     styles.mask,
-      //     {
-      //       height: controlPointY - curveCenterPointY,
-      //     },
-      //   ]}
-      //   maskElement={
-      //     <Svg height="100%" width="100%">
-      //       <Path
-      //         d={`M0 0 L${windowWidth} 0 L${windowWidth} ${maskHeight} Q${controlPointX} ${controlPointY} 0 ${maskHeight} Z`}
-      //         fill={'#fff'}
-      //       />
-      //     </Svg>
-      //   }>
-      //   {/* <Image source={{uri: logoUri}} style={styles.image} /> */}
-      // </MaskedView>
-
       <View style={styles.imageConatiner}>
         <TouchableOpacity
           activeOpacity={0.5}
@@ -116,10 +100,12 @@ function Book(props) {
             setfullImgUri(image);
             setfullImgModal(true);
           }}>
-          <FastImage
+          <ExpoImage
             style={styles.image}
             source={image}
-            resizeMode={FastImage.resizeMode.cover}
+            contentFit="cover"
+            onLoadStart={() => {}}
+            onLoad={() => {}}
           />
         </TouchableOpacity>
       </View>
@@ -142,12 +128,12 @@ function Book(props) {
         />
 
         <View style={styles.fullImageModalContainer}>
-          <Image
+          <ExpoImage
             onLoadStart={() => setfullImgLoad(false)}
             onLoad={() => {
               setfullImgLoad(true);
             }}
-            resizeMode="contain"
+            contentFit="contain"
             style={styles.fullImageModalImage}
             source={fullImgUri}
           />

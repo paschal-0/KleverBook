@@ -19,7 +19,7 @@ import DynamicTabView from 'react-native-dynamic-tab-view';
 import {responsiveHeight} from 'react-native-responsive-dimensions';
 import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-easy-toast';
-import MaskedView from '@react-native-community/masked-view';
+import MaskedView from '@react-native-masked-view/masked-view';
 import Svg, {Path} from 'react-native-svg';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {TextInput} from 'react-native-paper';

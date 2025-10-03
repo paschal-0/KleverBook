@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
+  Image,
 } from 'react-native';
 import theme from '../theme/index';
 import {
@@ -13,12 +14,12 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import utils from '.';
-import ProgressiveFastImage from '@freakycoder/react-native-progressive-fast-image';
 import store from '../store/index';
 import {observer} from 'mobx-react';
 import NetInfo from '@react-native-community/netinfo';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import StarRating from 'react-native-star-rating';
+import { Image as ExpoImage } from 'expo-image';
 
 export default observer(BookCard);
 function BookCard(props) {
@@ -84,7 +85,6 @@ function BookCard(props) {
               numberOfLines={1}
               ellipsizeMode="tail">
               {category}
-              {/* <Text style={styles.foodCardTitle33}>{category}</Text> */}
             </Text>
             <View style={{width: '45%', marginTop: 5}}>
               <StarRating
@@ -99,23 +99,14 @@ function BookCard(props) {
         </View>
 
         <View style={styles.foodCardImgConatiner}>
-          <ProgressiveFastImage
+          <ExpoImage
             source={image}
             style={styles.foodCardImg}
-            loadingSource={imgLoader}
-            loadingImageStyle={styles.ImageLoader}
-            // thumbnailSource={image}
-            // thumbnailAnimationDuration={2000}
+            placeholder={imgLoader}
+            contentFit="cover"
+            transition={250}
           />
         </View>
-
-        {/* {item > 0 && (
-          <View style={styles.section1}>
-            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.t1}>
-              {item <= 99 ? item : '99+'}
-            </Text>
-          </View>
-        )} */}
       </TouchableOpacity>
 
       {sep()}
@@ -131,18 +122,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 25,
     height: 110,
-    // backgroundColor: 'red',
   },
 
   foodCardTxtConatiner: {
     width: '60%',
     height: '100%',
-    // backgroundColor: 'blue',
   },
   foodCardImgConatiner: {
     width: '40%',
     height: '100%',
-    // backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
@@ -152,7 +140,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     resizeMode: 'cover',
     backgroundColor: theme.color.background,
-    // elevation: 3,
   },
   ImageLoader: {
     height: '30%',
@@ -184,7 +171,6 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.fontNormal,
     color: theme.color.subTitle,
     lineHeight: 17,
-
     textTransform: 'capitalize',
   },
   foodCardTitle33: {
@@ -197,9 +183,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: '100%',
-    // backgroundColor: 'red',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
 
   addcart: {
@@ -213,7 +196,6 @@ const styles = StyleSheet.create({
   addcart2Container: {
     width: '50%',
     height: responsiveHeight(3.3),
-    // backgroundColor: 'yellow',
     borderRadius: 7,
     alignItems: 'center',
     flexDirection: 'row',
@@ -227,7 +209,6 @@ const styles = StyleSheet.create({
     marginLeft: 3,
   },
   likecart: {
-    // backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -242,14 +223,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -2,
     top: -2,
-    // backgroundColor: theme.color.button1,
     elevation: 3,
     backgroundColor: 'red',
   },
   t1: {
     fontSize: 10,
     color: theme.color.buttonText,
-
     fontFamily: theme.fonts.fontBold,
     lineHeight: 15,
   },

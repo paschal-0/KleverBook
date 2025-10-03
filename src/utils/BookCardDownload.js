@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
@@ -14,12 +14,12 @@ import {
   responsiveWidth,
 } from 'react-native-responsive-dimensions';
 import utils from '.';
-import ProgressiveFastImage from '@freakycoder/react-native-progressive-fast-image';
 import store from '../store/index';
 import {observer} from 'mobx-react';
 import NetInfo from '@react-native-community/netinfo';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import StarRating from 'react-native-star-rating';
+import { Image as ExpoImage } from 'expo-image';
 
 export default observer(BookCardDownload);
 function BookCardDownload(props) {
@@ -28,18 +28,17 @@ function BookCardDownload(props) {
   const dt = props.data || [];
   const d = props.book || [];
   let expire = dt.expired || false;
-  // console.log("dt : ",dt)
-  // console.log("book : ",d)
+
   let screen = props.screen || '';
 
   let nav = props.nav;
   let detail = d.book_story || '---';
-  let authorName = d.author.name || '';
-  let aboutAuthor = d.writer.author_biography || '';
+  let authorName = d.author?.name || '';
+  let aboutAuthor = d.writer?.author_biography || '';
 
   let name = d.book_title || '';
   let writerName = authorName || 'Gabrielle Zevin';
-  let category = d.book_category.category_name || '';
+  let category = d.book_category?.category_name || '';
   let rating = 3 || 0;
   let image = d.book_cover
     ? {uri: d.book_cover}
@@ -64,11 +63,8 @@ function BookCardDownload(props) {
         }
       : {
           shadowColor: '#000',
-
           shadowOffset: {width: 0, height: 0.5},
-
           shadowOpacity: 0.6,
-
           shadowRadius: 1,
         };
 
@@ -121,23 +117,14 @@ function BookCardDownload(props) {
         </View>
 
         <View style={styles.foodCardImgConatiner}>
-          <ProgressiveFastImage
+          <ExpoImage
             source={image}
             style={styles.foodCardImg}
-            loadingSource={imgLoader}
-            loadingImageStyle={styles.ImageLoader}
-            // thumbnailSource={image}
-            // thumbnailAnimationDuration={2000}
+            placeholder={imgLoader}
+            contentFit="cover"
+            transition={250}
           />
         </View>
-
-        {/* {item > 0 && (
-          <View style={styles.section1}>
-            <Text numberOfLines={1} ellipsizeMode="tail" style={styles.t1}>
-              {item <= 99 ? item : '99+'}
-            </Text>
-          </View>
-        )} */}
       </View>
     </>
   );
@@ -150,7 +137,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 25,
-
     padding: 5,
     borderRadius: 5,
   },
@@ -158,12 +144,10 @@ const styles = StyleSheet.create({
   foodCardTxtConatiner: {
     width: '60%',
     height: '100%',
-    // backgroundColor: 'blue',
   },
   foodCardImgConatiner: {
     width: '40%',
     height: 110,
-    // backgroundColor: 'yellow',
     justifyContent: 'center',
     alignItems: 'flex-end',
   },
@@ -173,7 +157,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     resizeMode: 'cover',
     backgroundColor: theme.color.background,
-    // elevation: 3,
   },
   ImageLoader: {
     height: '30%',
@@ -205,7 +188,6 @@ const styles = StyleSheet.create({
     fontFamily: theme.fonts.fontNormal,
     color: theme.color.subTitle,
     lineHeight: 17,
-
     textTransform: 'capitalize',
   },
   foodCardTitle33: {
@@ -217,9 +199,6 @@ const styles = StyleSheet.create({
   fcBottom: {
     marginTop: 10,
     width: '100%',
-    // backgroundColor: 'red',
-    // alignItems: 'center',
-    // justifyContent: 'center',
   },
   foodCardTitleb: {
     fontSize: 12,
@@ -237,7 +216,6 @@ const styles = StyleSheet.create({
   addcart2Container: {
     width: '50%',
     height: responsiveHeight(3.3),
-    // backgroundColor: 'yellow',
     borderRadius: 7,
     alignItems: 'center',
     flexDirection: 'row',
@@ -251,7 +229,6 @@ const styles = StyleSheet.create({
     marginLeft: 3,
   },
   likecart: {
-    // backgroundColor: 'yellow',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -266,14 +243,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: -2,
     top: -2,
-    // backgroundColor: theme.color.button1,
     elevation: 3,
     backgroundColor: 'red',
   },
   t1: {
     fontSize: 10,
     color: theme.color.buttonText,
-
     fontFamily: theme.fonts.fontBold,
     lineHeight: 15,
   },

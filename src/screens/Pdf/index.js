@@ -27,7 +27,7 @@ import {
 import Pdf from 'react-native-pdf';
 import Modal from 'react-native-modal';
 import {CountdownCircleTimer} from 'react-native-countdown-circle-timer';
-import FastImage from 'react-native-fast-image';
+import { Image as ExpoImage } from 'expo-image';
 import VideoPlayer from 'react-native-video-player';
 
 export default observer(PDF);
@@ -493,9 +493,9 @@ function PDF(props) {
                   <TouchableOpacity
                     activeOpacity={0.9}
                     onPress={() => redirecturl(adData.redirect_url)}>
-                    <FastImage
+                    <ExpoImage
                       onError={e => {
-                        console.warn('video  load error : ', e);
+                        console.warn('image load error : ', e);
                         setadLoadErr(true);
                       }}
                       onLoad={() => {
@@ -504,9 +504,9 @@ function PDF(props) {
                       style={styles.foodCardImg}
                       source={{
                         uri: adData.ad_file,
-                        priority: FastImage.priority.high,
                       }}
-                      resizeMode={FastImage.resizeMode.contain}
+                      priority="high"
+                      contentFit="contain"
                     />
                     {!adLoad && (
                       <Image

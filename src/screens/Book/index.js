@@ -14,7 +14,6 @@ import {observer} from 'mobx-react';
 import store from '../../store/index';
 import utils from '../../utils/index';
 import theme from '../../theme';
-// removed: import FastImage from 'react-native-fast-image';
 import NetInfo from '@react-native-community/netinfo';
 import Toast from 'react-native-easy-toast';
 import MaskedView from '@react-native-masked-view/masked-view';

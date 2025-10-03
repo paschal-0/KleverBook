@@ -1,13 +1,14 @@
-//screens
-import color from './Color/index';
-import window from './Window/index';
-import fonts from './Fonts/index';
+// src/theme/index.js
+import color from './Color';   // or './color' if your folder is lowercase
+import window from './Window'; // or './window'
+import fonts from './Fonts';   // or './fonts'
 import DropDown from './DropDown';
-// import  Name from "./Strings/index"
 
-export default theme = {
+const theme = {
   color,
   window,
   fonts,
   DropDown,
 };
+
+export default theme;

@@ -39,5 +39,15 @@ yarn-error.*
 app-example
 
 # generated native folders
-/ios
-/android
+/android/.gradle
+/android/app/build/
+/android/build/
+/android/.idea
+!android/gradle.properties 
+/ios/Pods/
+/ios/build/
+/ios/DerivedData/
+/ios/.idea
+/ios/Podfile
+/ios/Podfile.lock
+!ios/GoogleService-Info.plist
